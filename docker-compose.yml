@@ -1,0 +1,31 @@
+version: '3'
+services:
+  go:
+    build:
+      dockerfile: ./config/golabs.dockerfile
+      context: .
+    image: yurisouza/golabs
+    container_name: golabs
+    ports:
+      - "80:3000"
+    networks:
+      - production-network
+    depends_on:
+      - "postgresdb"
+  
+  postgresdb:
+    build:
+      dockerfile: ./config/database.dockerfile
+      context: .
+    image: yurisouza/postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - production-network
+
+networks:
+  production-network:
+    driver: bridge

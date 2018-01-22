@@ -1,0 +1,4 @@
+FROM postgres
+MAINTAINER Yuri Souza
+ENV POSTGRES_PASSWORD=postgres
+EXPOSE 5432
